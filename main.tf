@@ -40,3 +40,28 @@ resource "aws_route" "mtc_public_route" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.mtc_igw.id
 }
+
+resource "aws_route_table_association" "mtc_public_route_table_association" {
+  subnet_id = aws_subnet.mtc_public_subnet.id
+  route_table_id = aws_route_table.mtc_public_route_table.id
+}
+
+resource "aws_security_group" "mtc_sg"{
+  name = "dev_sg"
+  description = "dev security group"
+  vpc_id = aws_vpc.mtc_vpc.id 
+
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
