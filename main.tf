@@ -65,3 +65,8 @@ resource "aws_security_group" "mtc_sg"{
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_key_pair" "mtc_key" {
+  key_name = "dev_key"
+  public_key = file("C:/Users/juana/.ssh/mtckey.pub")
+}
